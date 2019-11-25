@@ -12,7 +12,11 @@ var headlineSchema = new Schema({
     required: true,
     unique: true
   },
-  summary: {
+  section: {
+    type: String,
+    required: false
+  },
+  link: {
     type: String,
     required: true
   },

@@ -104,7 +104,7 @@ $(document).ready(function() {
             // if successful scraping articles and comparing to saved articles
             // re-render the articles to the page and alert the user how many
             initPage();
-            bootbox.alert("<h3 class='text-center m-top-uo'>" + data.message + "<h3>");
+            bootbox.alert("<h3 class='text-center m-top-80'>" + data.message + "<h3>");
         });
     }
 });

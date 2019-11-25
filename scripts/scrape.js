@@ -1,32 +1,47 @@
 // require request and cheerio, enabling scrapes
-var request = require("request");
+var axios = require("axios");
 var cheerio = require("cheerio");
+var baseURL = "https://www.cnn.com";
 
-var scrape = function (cb) {
+var scrape = function(cb) {
 
-    request("http://www.nytimes.com", function(err, res, body) {
+    // making an axios 'get' to the World section of CNN.com
+    axios.get("https://www.cnn.com/world/").then(function(response) {
 
-        var $ = cheerio.load(body);
-        var articles = [];
-        $(".theme-summary").each(function(i, element){
+    var $ = cheerio.load(response.data);
 
-            var head = $(this).children(".story-heading").text().trim();
-            var sum = $(this).children(".summary").text().trim();
+    // An empty array to save the data that we'll scrape
+    var articles = [];
 
-            if (head && sum) {
-                var headNeat = head.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
-                var sumNeat = sum.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
+    $("h3").each(function(i, element) {
 
-                var dataToAdd = {
-                    headline: headNeat,
-                    summary: sumNeat
-                };
+        // Save the title, section, and link data
+        var title = $(element).find("span.cd__headline-text").text();
+        var section = $(element).parent().parent().parent().attr("data-section-name");
+        var link = $(element).find("a").attr("href");
 
-                articles.push(dataToAdd);
+        // Save these results in an object that we'll push into the articles array
+        if (title && link) {
+
+            // only include items where the href starts with "/"
+            // (avoids including ads)
+            
+            if(link[0] === "/") {
+                articles.push({
+                title: title,
+                section: section,
+                link: baseURL + link
+                });
             }
-        });
-        cb(articles);
+        }
     });
-};
+
+    // Log the results
+    console.log(articles);
+    // callback
+    cb(articles);
+
+    });
+}
 
 module.exports = scrape;
