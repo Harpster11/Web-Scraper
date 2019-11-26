@@ -11,7 +11,7 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="/">CNN World News Mongo Scraper</a>
+  <a class="navbar-brand" href="/">Jerusalem Post Mongo Scraper</a>
   <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -45,35 +45,39 @@
   </div>
 </div>
 
-{{!-- ARTICLES SAVED --}}
-{{!-- <div class="container-fluid article-container">
-    <div data-_id="5ddb83912d01700015dc2987" class="card">
+<div class="container-fluid article-container">
+
+    {{!-- <div data-_id=5ddd7471d6bc7d001583f62b class="card">
       <div class="card-header">
         <h3>
-          <a class="article-link" target="_blank" rel="noopener noreferrer" href="https://www.nytimes.com/2019/11/20/magazine/tiktok-mom.html">The Moms of TikTok Are Deeply Corny — and Gloriously Free</a>
+          <a class="article-link" target="_blank" rel="noopener noreferrer" href="https://www.nytimes.com/2019/11/24/arts/celebrity-instagram.html">When Instagram Killed the Tabloid Star</a>
           <a class="btn btn-danger delete">Delete From Saved</a>
           <a class="btn btn-info notes">Article Notes</a>
         </h3>
       </div>
-      <div class="card-body">On Instagram, “mom” means linen-clad babies and perfect homes. On TikTok, it’s real women being their wholesome, goofy selves.</div>
-    </div>
-    <div data-_id="5ddb83912d01700015dc2985" class="card">
-      <div class="card-header">
-        <h3>
-          <a class="article-link" target="_blank" rel="noopener noreferrer" href="https://www.nytimes.com/2019/11/24/opinion/trump-impeachment-hearings.html">Why President Trump’s Ukraine Scheme Matters</a>
-          <a class="btn btn-danger delete">Delete From Saved</a>
-          <a class="btn btn-info notes">Article Notes</a>
-        </h3>
-      </div>
-      <div class="card-body">It’s what the founders warned us about.</div>
-    </div>
-</div> --}}
-{{!-- ARTICLES SAVED END --}}
+      <div class="card-body">In the 2010s, celebrity culture was domesticated by a free photo sharing app, and the paparazzi were left stranded on the pavement.</div>
+    </div> --}}
+
+    {{#each saved_data}}
+      {{#if this.saved}}
+        <div data-_id={{this.ObjectId}} class="card">
+          <div class="card-header">
+            <h3>
+              <a class="article-link" target="_blank" rel="noopener noreferrer" href={{this.link}}>{{this.headline}}</a>
+              <a class="btn btn-danger delete">Delete From Saved</a>
+              <a class="btn btn-info notes">Article Notes</a>
+            </h3>
+          </div>
+          <div class="card-body">{{this.reporterDate}}</div>
+      {{/if}}
+    {{/each}}
+
+</div>
 
 
 <footer class="footer">
   <div class="container">
-    <p>CNN World News Monger Scraper</p>
+    <p>Jerusalem Post Breaking News</p>
   </div>
 </footer>
 
@@ -84,42 +88,3 @@
 <script src="../../assets/javascript/saved.js"></script>
 
 </body></html>
-
-{{!-- INSERT END --}}
-
-{{!-- 
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Saved Articles</a>
-        </div>
-        <ul class="nav navbar-nav list-group-horizontal">
-            <li class="btn btn-light"><a href="/">Home</a></li>
-            <li class="active btn btn-light"><a href="/saved">Saved Articles</a></li>
-        </ul>
-    </div>
-</nav>
-<div class="jumbotron text-center">
-    <div class="overlay">
-    </div>
-    <div class="background-image">
-    </div>
-    <div class="caption">
-        <h1>Saved Articles</h1>
-        <p>Your Saved Articles</p>
-    </div>
-</div>
-<div class="container-fluid article-container">
-</div>
-
-<footer class="footer">
-    <div class="container">
-        <p>New York Times Web Scraper</p>
-    </div>
-</footer>
-
-<!-- JQUERY JAVASCRIPT SRC -->
-<script src="https://code.jquery.com/jquery.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
-<script src="../../assets/javascript/saved.js"></script> --}}

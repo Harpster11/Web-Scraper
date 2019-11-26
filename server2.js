@@ -21,12 +21,12 @@ axios.get("https://www.cnn.com/world/").then(function(response) {
   // An empty array to save the data that we'll scrape
   var results = [];
 
-  // With cheerio, find each li.children(article) tag with the "title" class
+  // With cheerio, find each li.children(article) tag with the "headline" class
   // (i: iterator. element: the current element)
   $("h3").each(function(i, element) {
 
-    // Save the title, section, and link data
-    var title = $(this).find("span.cd__headline-text").text();
+    // Save the headline, section, and link data
+    var headline = $(this).find("span.cd__headline-text").text();
     var section = $(this).parent().parent().parent().attr("data-section-name");
     var link = $(this).find("a").attr("href");
 
@@ -34,7 +34,7 @@ axios.get("https://www.cnn.com/world/").then(function(response) {
     
     if(link[0] === "/") {
         results.push({
-        title: title,
+        headline: headline,
         section: section,
         link: baseURL + link
         });

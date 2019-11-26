@@ -2,12 +2,12 @@
 var axios = require("axios");
 var cheerio = require("cheerio");
 // set base URL for links
-var baseURL = "https://www.cnn.com";
+var baseURL = "https://www.jpost.com/breaking-news/";
 
 var scrape = function(cb) {
 
     // making an axios 'get' to the World section of CNN.com
-    axios.get("https://www.cnn.com/world/").then(function(response) {
+    axios.get(baseURL).then(function(response) {
     
     console.log("SCRAPE : AXIOS RESPONSE ====>");
     // console.log(response.data);
@@ -17,28 +17,29 @@ var scrape = function(cb) {
     // An empty array to save the data that we'll scrape
     var articles = [];
 
-    $("h3").each(function(i, element) {
+    $("div.breaking-news-link-container").each(function(i, element) {
 
-        // Save the title, section, and link data
-        var title = $(this).find("span.cd__headline-text").text();
-        var section = $(this).parent().parent().parent().attr("data-section-name");
+        // Save the headline, section, and link data
+        var headline = $(this).find("a").attr("title");
         var link = $(this).find("a").attr("href");
+        // var reporter = $(this).find("ul").children().text("il[0]");
+        // var date = $(this).find("ul").children().text("il[1]");
+        // var reporterDate = reporter + ", " + date;
+        var reporterDate = $(this).find("il").text();
 
-        console.log(title);
+        console.log(headline);
+        console.log(link);
+        console.log(reporterDate);
+        console.log("========");
         
         // Save these results in an object that we'll push into the articles array
-        if (title && link) {
+        if (headline && link) {
 
-            // only include items where the href starts with "/"
-            // (avoids including ads)
-
-            if(link[0] === "/") {
-                articles.push({
-                title: title,
-                section: section,
-                link: baseURL + link
-                });
-            }
+            articles.push({
+            headline: headline,
+            link: link,
+            reporterDate: reporterDate
+            });
         }
     });
 

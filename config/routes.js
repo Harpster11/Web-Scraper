@@ -10,12 +10,26 @@ var notesController = require("../controllers/notes");
 module.exports = function(router) {
     // renders the homepage
     router.get("/", function(req, res) {
+        // var query = {};
+        // headlinesController.get(query, function(data) {
+        // res.render("home", {data});
+        // });
+
         res.render("home");
     });
+
     // renders the saved handlebars page
     router.get("/saved", function(req, res) {
+
+        // query all saved articles 
+        // var query = {};
+        // query.saved = "true";
+        // headlinesController.get(query, function(err, saved_data) {
+        // res.render("saved", {saved_data});
+        // });
         res.render("saved");
     });
+
     // fetch headlines via the api
     router.get("/api/fetch", function(req, res) {
         headlinesController.fetch(function(err, docs) {
@@ -33,6 +47,7 @@ module.exports = function(router) {
             }
         });
     });
+
     // get headlines from the db
     router.get("/api/headlines", function(req, res) {
         var query = {};
@@ -44,6 +59,7 @@ module.exports = function(router) {
             res.json(data);
         });
     });
+
     // delete a specific headline
     router.delete("/api/headlines/:id", function(req, res) {
         var query = {};
@@ -52,12 +68,23 @@ module.exports = function(router) {
             res.json(data);
         });
     });
+
+    // update a specific headline as saved
+    router.put("/api/headlines/:id", function(req, res) {
+        var query = {};
+        query._id = req.params.id;
+        headlinesController.update(req.body, function(err, data) {
+            res.json(data);
+        });
+    });
+
     // route to update the headlines
     router.patch("/api/headlines", function(req, res) {
         headlinesController.update(req.body, function(err, data) {
             res.json(data);
         });
     });
+
     // getting all notes associated with a headline
     router.get("/api/notes/:headline_id?", function(req, res) {
         var query = {};

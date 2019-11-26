@@ -12,7 +12,7 @@ var headlineSchema = new Schema({
     required: true,
     unique: true
   },
-  section: {
+  reporterDate: {
     type: String,
     required: false
   },

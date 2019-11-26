@@ -8,8 +8,10 @@ $(document).ready(function() {
     $(document).on("click", ".scrape-new", handleArticleScrape);
     $(".clear").on("click", handleArticleClear);
   
+    // initPage function
+    initPage();
+
     function initPage() {
-      console.log("INDEX.JS => INITPAGE =========>")
       // Run an AJAX request for any unsaved headlines
       $.get("/api/headlines?saved=false").then(function(data) {
         articleContainer.empty();
@@ -45,14 +47,14 @@ $(document).ready(function() {
       var cardHeader = $("<div class='card-header'>").append(
         $("<h3>").append(
           $("<a class='article-link' target='_blank' rel='noopener noreferrer'>")
-            .attr("href", article.url)
+            .attr("href", article.link)
             .text(article.headline),
           $("<a class='btn btn-success save'>Save Article</a>")
         )
       );
-  
-      var cardBody = $("<div class='card-body'>").text(article.summary);
-  
+
+      var cardBody = $("<div class='card-body'>").text(article.reporterDate);
+
       card.append(cardHeader, cardBody);
       // We attach the article's id to the jQuery element
       // We will use this when trying to figure out which article the user wants to save
@@ -97,6 +99,9 @@ $(document).ready(function() {
         .parents(".card")
         .remove();
   
+      console.log("INDEX.JS: ARTICLE TO SAVE =====")
+      console.log(articleToSave);
+
       articleToSave.saved = true;
       // Using a patch method to be semantic since this is an update to an existing record in our collection
       $.ajax({
@@ -115,8 +120,8 @@ $(document).ready(function() {
     function handleArticleScrape() {
       // This function handles the user clicking any "scrape new article" buttons
       $.get("/api/fetch").then(function(data) {
-        // If we are able to successfully scrape the CNN.COM/World website and compare the articles to those
-        // already in our collection, re render the articles on the page
+        // If we are able to successfully scrape the CNN.COM/World website and compare the articles to those already in our collection, 
+        // re render the articles on the page
         // and let the user know how many unique articles we were able to save
         initPage();
         bootbox.alert($("<h3 class='text-center m-top-80'>").text(data.message));

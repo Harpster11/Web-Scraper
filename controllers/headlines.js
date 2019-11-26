@@ -12,7 +12,7 @@ module.exports = {
                 articles[i].date = makeDate();
                 articles[i].saved = false;
             }
-
+            // save to db collection
             Headline.collection.insertMany(articles, {ordered:false}, function(err, docs){
                 cb(err, docs);
             });

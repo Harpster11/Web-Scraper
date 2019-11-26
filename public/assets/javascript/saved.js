@@ -10,6 +10,9 @@ $(document).ready(function() {
     $(document).on("click", ".btn.note-delete", handleNoteDelete);
     $(".clear").on("click", handleArticleClear);
   
+    // initPage function when page is loaded
+    initPage();
+
     function initPage() {
       // Empty the article container, run an AJAX request for any saved headlines
       $.get("/api/headlines?saved=true").then(function(data) {
@@ -46,14 +49,14 @@ $(document).ready(function() {
       var cardHeader = $("<div class='card-header'>").append(
         $("<h3>").append(
           $("<a class='article-link' target='_blank' rel='noopener noreferrer'>")
-            .attr("href", article.url)
+            .attr("href", article.link)
             .text(article.headline),
           $("<a class='btn btn-danger delete'>Delete From Saved</a>"),
           $("<a class='btn btn-info notes'>Article Notes</a>")
         )
       );
   
-      var cardBody = $("<div class='card-body'>").text(article.summary);
+      var cardBody = $("<div class='card-body'>").text(article.reporterDate);
   
       card.append(cardHeader, cardBody);
   

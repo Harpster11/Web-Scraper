@@ -105,6 +105,7 @@ html {
   
   .card .card-body {
     font-size: 16px;
+    font-weight: 500;
   }
   
   .card .card-header .article-link {
