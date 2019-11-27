@@ -34,13 +34,13 @@ module.exports = function(router) {
     router.get("/api/fetch", function(req, res) {
         headlinesController.fetch(function(err, docs) {
             if (!docs || docs.insertedCount === 0) {
-                console.log("ROUTES : NO ARTICLES =====>");
+                // console.log("ROUTES : NO ARTICLES =====>");
                 res.json({
                     message: "Sorry. No new articles."
                 });
             }
             else {
-                console.log("ROUTES : ADDED ARTICLES =====>");
+                // console.log("ROUTES : ADDED ARTICLES =====>");
                 res.json({
                     message: "Added " + docs.insertedCount + " new articles."
                 });
@@ -95,6 +95,7 @@ module.exports = function(router) {
             res.json(data);
         });
     });
+
     // route to delete a note
     router.delete("/api/notes/:id", function(req, res) {
         var query = {};
@@ -103,8 +104,11 @@ module.exports = function(router) {
             res.json(data);
         });
     });
+
     // route to post new notes to articles
     router.post("/api/notes", function(req, res) {
+        // console.log("SAVE NOTE => REQ BODY");
+        console.log(req.body);
         notesController.save(req.body, function(data) {
             res.json(data);
         });

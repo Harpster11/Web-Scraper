@@ -19,31 +19,26 @@ var scrape = function(cb) {
 
     $("div.breaking-news-link-container").each(function(i, element) {
 
-        // Save the headline, section, and link data
+        // Save the headline, link, reporter and date
         var headline = $(this).find("a").attr("title");
         var link = $(this).find("a").attr("href");
-        // var reporter = $(this).find("ul").children().text("il[0]");
-        // var date = $(this).find("ul").children().text("il[1]");
-        // var reporterDate = reporter + ", " + date;
-        var reporterDate = $(this).find("il").text();
-
-        console.log(headline);
-        console.log(link);
-        console.log(reporterDate);
-        console.log("========");
+        var rd = $(this).find('ul').children('li').text();
+        var len = rd.length;
+        var date = rd.slice(-19);
+        var reporter = rd.slice(0, (len - 19));
         
-        // Save these results in an object that we'll push into the articles array
+        // Save results in an object and push into the articles array
         if (headline && link) {
 
             articles.push({
             headline: headline,
             link: link,
-            reporterDate: reporterDate
+            reporterDate: reporter + " " + date
             });
         }
     });
 
-    console.log("SCRAPE.JS ARTICLES ========> ");
+    // console.log("SCRAPE.JS ARTICLES ========> ");
     console.log(articles);
 
     // callback

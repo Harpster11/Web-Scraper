@@ -99,7 +99,7 @@ $(document).ready(function() {
         .parents(".card")
         .remove();
   
-      console.log("INDEX.JS: ARTICLE TO SAVE =====")
+      // console.log("INDEX.JS: ARTICLE TO SAVE =====")
       console.log(articleToSave);
 
       articleToSave.saved = true;
