@@ -8,25 +8,12 @@ var headlinesController = require("../controllers/headlines");
 var notesController = require("../controllers/notes");
 
 module.exports = function(router) {
-    // renders the homepage
     router.get("/", function(req, res) {
-        // var query = {};
-        // headlinesController.get(query, function(data) {
-        // res.render("home", {data});
-        // });
-
         res.render("home");
     });
 
     // renders the saved handlebars page
     router.get("/saved", function(req, res) {
-
-        // query all saved articles 
-        // var query = {};
-        // query.saved = "true";
-        // headlinesController.get(query, function(err, saved_data) {
-        // res.render("saved", {saved_data});
-        // });
         res.render("saved");
     });
 
@@ -81,6 +68,18 @@ module.exports = function(router) {
     // route to update the headlines
     router.patch("/api/headlines", function(req, res) {
         headlinesController.update(req.body, function(err, data) {
+            res.json(data);
+        });
+    });
+
+    // route to clear the headlines
+    router.delete("/api/clear", function(req, res) {
+        var query = {};
+        console.log(query);
+        headlinesController.delete(query, function(err, data) {
+            if (err) {
+                console.log(err);
+            }
             res.json(data);
         });
     });

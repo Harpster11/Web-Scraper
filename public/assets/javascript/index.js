@@ -127,12 +127,12 @@ $(document).ready(function() {
         bootbox.alert($("<h3 class='text-center m-top-80'>").text(data.message));
       });
     }
-  
+    // clear articles form view, remove from db
     function handleArticleClear() {
-      $.get("api/clear").then(function() {
+      // $.get("api/clear").then(function() {
         articleContainer.empty();
-        initPage();
-      });
+        // initPage();
+      // });
     }
   });
   
