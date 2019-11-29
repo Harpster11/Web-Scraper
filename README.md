@@ -12,9 +12,7 @@ This app scrapes the Jerusalem Post website (www.jpost.com/breaking-news) for br
 
 The *headline*, *link*, *reporter*, and *date* of the report are captured, stored, and rendered to the app's home page. Here is how a headline is displayed in the Web-Scraper app.
 
-(https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/unsaved_article.png)
-
-https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/unsaved_article.png
+![Unsaved Article](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/my_unsaved_article.png)
 
 Articles can be marked as 'saved' by clicking on the *SAVE ARTICLE* button.
 
