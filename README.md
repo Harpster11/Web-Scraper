@@ -32,7 +32,7 @@ Here is the Notes (modal) bootbox. Notes can be saved or removed from the list.
 
 ![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/note.png)
 
-The Saved Articles navbar has a link to return to the Home Page, as well as a *CLEAR ARTICLES* button.
+The Saved Articles navbar has a link to return to the Home Page, as well as a *CLEAR ARTICLES* button. In this version of the app, this button removes the list of headlines from page without deleting them from the database.
 
 ### Technology
 
