@@ -14,6 +14,8 @@ The *headline*, *link*, *reporter*, and *date* of the report are captured, store
 
 ![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/unsaved_article.png)
 
+https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/unsaved_article.png
+
 Articles can be marked as 'saved' by clicking on the *SAVE ARTICLE* button.
 
 Clicking on the headline itself will load the linked article in another web tab, as displayed below.
