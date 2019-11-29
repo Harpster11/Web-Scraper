@@ -12,21 +12,19 @@ This app scrapes the Jerusalem Post website (www.jpost.com/breaking-news) for br
 
 The *headline*, *link*, *reporter*, and *date* of the report are captured, stored, and rendered to the app's home page. Here is how a headline is displayed in the Web-Scraper app.
 
-![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/linked_article.png)
-
-Clicking on the headline will load the linked article in another web tab.
-
 ![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/unsaved_article.png)
 
-![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/linked_article.png)
+Articles can be marked as 'saved' by clicking on the *SAVE ARTICLE* button.
 
-Articles can be marked as 'saved' by clicking on the *Save Article* button.
+Clicking on the headline itself will load the linked article in another web tab, as displayed below.
+
+![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/linked_article.png)
 
 The Home page navbar has links to the *Home* page and *Saved* articles.
 
 ![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/unsaved_article_navbar.png)
 
-Click on the *Saved Articles* link to view the list of saved articles. Saved articles have two buttons for either removing it (*Delete From Saved*), or adding notes to it (*Article Notes*).
+Click on the *Saved Articles* link to view the list of saved articles. Saved articles have two buttons for either removing it (*DELETE FROM SAVED*), or adding notes to it (*ARTICLE NOTES*).
 
 ![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/saved_article.png)
 
@@ -34,7 +32,7 @@ Here is the Notes (modal) bootbox. Notes can be saved or removed from the list.
 
 ![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/note.png)
 
-The Saved Articles navbar has a link to return to the Home Page, as well as a *Clear Articles* button.
+The Saved Articles navbar has a link to return to the Home Page, as well as a *CLEAR ARTICLES* button.
 
 ### Technology
 
