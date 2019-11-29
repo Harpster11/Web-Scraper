@@ -206,7 +206,7 @@ $(document).ready(function() {
     // clear articles from view, remove from db
     function handleArticleClear() {
       // $.get("api/clear")
-      //   .then(function() {
+        // .then(function() {
           articleContainer.empty();
         //   initPage();
         // });
