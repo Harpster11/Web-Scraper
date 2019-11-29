@@ -1,73 +1,88 @@
 # Web-Scraper
 
-A node app that scrapes a news website for breaking news headlines.
-
 ![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/jumbotron.png)
 
 ## What the app does
 
-This app displays a menu of burgers, a list of burgers to be devoured, and customers to eat them. The user has the option to:
+This app scrapes the Jerusalem Post website (www.jpost.com/breaking-news) for breaking news headlines.
 
-1. Add customers to the customer list
-2. Add new burgers to the menu, with toppings
-3. Select a customer and devour a burger on the menu
+![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/jpost-breaking-news-head.png)
 
+![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/jpost-breaking-news-list.png)
 
+The *headline*, *link*, *reporter*, and *date* of the report are captured, stored, and rendered to the app's home page. Here is how a headline is displayed in the Web-Scraper app.
+
+![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/linked_article.png)
+
+Clicking on the headline will load the linked article in another web tab.
+
+![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/unsaved_article.png)
+
+![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/linked_article.png)
+
+Articles can be marked as 'saved' by clicking on the *Save Article* button.
+
+The Home page navbar has links to the *Home* page and *Saved* articles.
+
+![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/unsaved_article_navbar.png)
+
+Click on the *Saved Articles* link to view the list of saved articles. Saved articles have two buttons for either removing it (*Delete From Saved*), or adding notes to it (*Article Notes*).
+
+![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/saved_article.png)
+
+Here is the Notes (modal) bootbox. Notes can be saved or removed from the list.
+
+![Web-Scraper](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/note.png)
+
+The Saved Articles navbar has a link to return to the Home Page, as well as a *Clear Articles* button.
 
 ### Technology
 
-The __dependencies__ for this nodejs app are:
+The **dependencies** for this nodejs app are:
 
-* body-parser
-* dotenv
+* axios
+* bootbox
+* cheerio
 * express
 * express-handlebars
-* fs
-* method-override
-* mysql2
-* path
-* sequelize
+* mongoose
+* morgan
+* request
 
-The __database__ is MySQL, which stores two tables, Burgers and Customers, which are defined in two Model files. Burgers has a *belongsTo* association with the Customers table with a CustomerId foreign key.
+The **database** used by the app is MongoDB. The database name is *mongoHeadLines*. It stores two collections, *Headlines* and *Notes*, which are defined in two Model files. To relate notes that may be entered for a particular headline, the Notes model includes a reference id to Headline model using the _headlineId data record.
 
-A __Handlebars Helper__ called *equal* was created in order to list burgers devoured by each customer when *index.Handlebars* is rendered. Here is the helper code added to the *server.js* file.
+Web data is requested and returned using the Axios fetch method. Specific data elements are accessed using Cheerio and stored in a MongoDB database. 
 
-````
-var hbs = exphbs.create({
-  helpers: {
-    equal : function(a, b, opts) {
-      if (a == b) {
-          return opts.fn(this);
-      } else {
-          return opts.inverse(this);
-      }
-    }
-  },
-  defaultLayout: 'main',
-  partialsDir: ['views/partials/']
-});
+The Headline collection in three records:
+ 
+ 1. headline
+ 2. link
+ 3. reporterDate
+
+The reporterDate field is created by slicing the <li> text returned after finding its parent <ul> tag.
 
 ````
-Here is how the {{#equal}} object is used to properly render the devoured burgers in the customer list column:
+var headline = $(this).find("a").attr("title");
+var link = $(this).find("a").attr("href");
+var rd = $(this).find('ul').children('li').text();
+var len = rd.length;
+var date = rd.slice(-19);
+var reporter = rd.slice(0, (len - 19));
+````
+
+The date and reporter slices are concatenated into the reportDate data record:
 
 ````
-<div class="col-3 text-center" id="customer-list">
-    {{#each customer_data}}
-        <div class="text-center customer">
-            {{this.name}}
-        </div>
-
-        {{!-- devoured burger list --}}
-        <div class="eaten">
-            {{#each ../burger_data}}
-                {{#equal ../this.id this.CustomerId}}
-                    <input class="form-control" type="text" placeholder="{{this.id}}. {{this.name}}" readonly>
-                {{/equal}}
-            {{/each}}
-        </div>
-    {{/each}}
-</div> 
+if (headline && link) {
+    articles.push({
+    headline: headline,
+    link: link,
+    reporterDate: reporter + " " + date
+    });
+}
 ````
+
+The **page rendering** engine is Express Handelbars.
 
 ### Author
 

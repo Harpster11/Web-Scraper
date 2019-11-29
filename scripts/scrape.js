@@ -9,7 +9,6 @@ var scrape = function(cb) {
     // making an axios 'get' to the World section of CNN.com
     axios.get(baseURL).then(function(response) {
     
-    console.log("SCRAPE : AXIOS RESPONSE ====>");
     // console.log(response.data);
 
     var $ = cheerio.load(response.data);
@@ -29,7 +28,6 @@ var scrape = function(cb) {
         
         // Save results in an object and push into the articles array
         if (headline && link) {
-
             articles.push({
             headline: headline,
             link: link,
