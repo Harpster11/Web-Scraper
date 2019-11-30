@@ -32,7 +32,7 @@ Here is the Notes (modal) bootbox. Notes can be saved or removed from the list.
 
 ![Note](https://github.com/AlanLeverenz/Web-Scraper/blob/master/public/assets/images/note.png)
 
-The Saved Articles navbar has a link to return to the Home Page, as well as a *CLEAR ARTICLES* button. In this version of the app, this button removes the list of headlines from page without deleting them from the database.
+The Saved Articles navbar has a link to return to the Home Page, as well as a *CLEAR ARTICLES* button. In this version of the app, this button removes the list of headlines from the webpage without deleting them from the database.
 
 ### Technology
 
@@ -80,7 +80,7 @@ if (headline && link) {
 }
 ````
 
-The **page rendering** engine is Express Handelbars.
+The **page rendering** engine is Express Handlebars. The main.handlebars {{{body}}} content is served by *home* and *saved* handlebar view files.
 
 ### Author
 
