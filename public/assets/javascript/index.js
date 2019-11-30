@@ -120,7 +120,7 @@ $(document).ready(function() {
     function handleArticleScrape() {
       // This function handles the user clicking any "scrape new article" buttons
       $.get("/api/fetch").then(function(data) {
-        // If we are able to successfully scrape the CNN.COM/World website and compare the articles to those already in our collection, 
+        // If we are able to successfully scrape the jpost.com/breaking-news website and compare the articles to those already in our collection, 
         // re render the articles on the page
         // and let the user know how many unique articles we were able to save
         initPage();

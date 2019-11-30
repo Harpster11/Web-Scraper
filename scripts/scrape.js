@@ -6,7 +6,7 @@ var baseURL = "https://www.jpost.com/breaking-news/";
 
 var scrape = function(cb) {
 
-    // making an axios 'get' to the World section of CNN.com
+    // making an axios 'get' to the Breaking-News section of jpost.com website
     axios.get(baseURL).then(function(response) {
     
     // console.log(response.data);
