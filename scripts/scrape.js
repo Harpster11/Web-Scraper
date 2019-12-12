@@ -42,7 +42,6 @@ var scrape = function() {
     // console.log("SCRAPE.JS ARTICLES ========> ");
     // console.log(articles);
 
-    // callback
     return articles;
 
     });
