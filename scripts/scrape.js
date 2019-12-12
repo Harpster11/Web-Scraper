@@ -32,7 +32,7 @@ var scrape = function() {
             var newData = {
                 headline: headline,
                 link: link,
-                reporterDate: reporter + "" + date
+                reporterDate: reporter + "  " + date
             };
             // push article data into the articles array
             articles.push(newData);
