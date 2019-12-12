@@ -10,11 +10,21 @@ var PORT = process.env.PORT || 3000;
 // express app instance
 var app = express();
 
+// ===== OLD START =====
 // setup express router
-var router = express.Router();
+// var router = express.Router();
 
 // require the routes file and pass the router object
-require("./config/routes")(router);
+// require("./config/routes")(router);
+// ===== OLD END =====
+
+// ===== NEW START =====
+
+// Require our routes
+var routes = require("./routes");
+
+// ===== NEW END =====
+
 
 // set static folder
 app.use(express.static(__dirname + "/public"));
@@ -30,8 +40,18 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+// OLD START =====
 // use router middleware
-app.use(router);
+// app.use(router);
+// OLD END =====
+
+// ===== NEW START =====
+
+// Have every request go through our route middleware
+app.use(routes);
+
+// ===== NEW END
+
 
 // if deployed, use the deployed database, otherwise the local database
 var db = process.env.MONOGODB_URI || "mongodb://localhost/mongoHeadLines";

@@ -1,36 +1,43 @@
+// Headline model
+// ==============
+
+// Require mongoose
 var mongoose = require("mongoose");
 
-// Save a reference to the Schema constructor
+// Create a schema class using mongoose's schema method
 var Schema = mongoose.Schema;
 
-// Using the Schema constructor, create a new UserSchema object
-// This is similar to a Sequelize model
+// Create the headlineSchema with our schema class
 var headlineSchema = new Schema({
-  // `headline` is required and of type String
+  // headline, a string, must be entered
   headline: {
     type: String,
     required: true,
-    unique: true
+    unique: { index: { unique: true } }
   },
+  // reporterDate, a string, must be entered
   reporterDate: {
     type: String,
     required: false
   },
+  // link (url), a string, must be entered
   link: {
     type: String,
     required: true
   },
-  date: String,
+  // date is just a string
+  date: {
+    type: Date,
+    default: Date.now
+  },
   saved: {
     type: Boolean,
     default: false
   }
-
 });
 
-// This creates our model from the above schema, using mongoose's model method
+// Create the Headline model using the headlineSchema
 var Headline = mongoose.model("Headline", headlineSchema);
 
-// Export the headline model
+// Export the Headline model
 module.exports = Headline;
-

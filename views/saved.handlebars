@@ -1,5 +1,3 @@
-{{!-- INSERT --}}
-
 <html lang="en"><head>
   <title>JP Mongo Scraper</title>
   <meta charset="UTF-8">
@@ -46,34 +44,34 @@
 </div>
 
 <div class="container-fluid article-container">
-
-    {{!-- <div data-_id=5ddd7471d6bc7d001583f62b class="card">
+  {{#each articles}}
+    <div data-_id={{this._id}} class="card">
       <div class="card-header">
         <h3>
-          <a class="article-link" target="_blank" rel="noopener noreferrer" href="https://www.nytimes.com/2019/11/24/arts/celebrity-instagram.html">When Instagram Killed the Tabloid Star</a>
+          <a class="article-link" target="_blank" rel="noopener noreferrer" href="{{this.link}}">{{this.headline}}</a>
           <a class="btn btn-danger delete">Delete From Saved</a>
           <a class="btn btn-info notes">Article Notes</a>
         </h3>
       </div>
-      <div class="card-body">In the 2010s, celebrity culture was domesticated by a free photo sharing app, and the paparazzi were left stranded on the pavement.</div>
-    </div> --}}
-
-    {{#each saved_data}}
-      {{#if this.saved}}
-        <div data-_id={{this.ObjectId}} class="card">
-          <div class="card-header">
-            <h3>
-              <a class="article-link" target="_blank" rel="noopener noreferrer" href={{this.link}}>{{this.headline}}</a>
-              <a class="btn btn-danger delete">Delete From Saved</a>
-              <a class="btn btn-info notes">Article Notes</a>
-            </h3>
-          </div>
-          <div class="card-body">{{this.reporterDate}}</div>
-      {{/if}}
-    {{/each}}
-
+      <div class="card-body">{{this.reporterDate}}</div>
+    </div>
+  {{/each}}
+  {{#unless articles.length}}
+    <div class="alert alert-warning text-center">
+      <h4>Uh Oh. Looks like we don't have any saved articles.</h4>
+    </div>
+    <div class="card">
+      <div class="card-header text-center">
+        <h3>Would You Like to Browse Available Articles?</h3>
+      </div>
+      <div class="card-body text-center">
+        <h4>
+          <a href="/">Browse Articles</a>
+        </h4>
+      </div>
+    </div>
+  {{/unless}}
 </div>
-
 
 <footer class="footer">
   <div class="container">
