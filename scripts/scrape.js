@@ -4,10 +4,10 @@ var cheerio = require("cheerio");
 // set base URL for links
 var baseURL = "https://www.jpost.com/breaking-news/";
 
-var scrape = function(cb) {
+var scrape = function() {
 
     // making an axios 'get' to the Breaking-News section of jpost.com website
-    axios.get(baseURL).then(function(response) {
+    return axios.get(baseURL).then(function(response) {
     
     // console.log(response.data);
 
@@ -28,19 +28,22 @@ var scrape = function(cb) {
         
         // Save results in an object and push into the articles array
         if (headline && link) {
-            articles.push({
-            headline: headline,
-            link: link,
-            reporterDate: reporter + " " + date
-            });
+            
+            var newData = {
+                headline: headline,
+                link: link,
+                reporterDate: reporter + "" + date
+            };
+            // push article data into the articles array
+            articles.push(newData);
         }
     });
-
+    
     // console.log("SCRAPE.JS ARTICLES ========> ");
-    console.log(articles);
+    // console.log(articles);
 
     // callback
-    cb(articles);
+    return articles;
 
     });
 }
