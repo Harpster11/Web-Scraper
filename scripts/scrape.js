@@ -1,49 +1,74 @@
 // require axios and cheerio, enabling scrapes
 var axios = require("axios");
-var cheerio = require("cheerio");
+const NewsAPI = require('newsapi');
+const newsapi = new NewsAPI('bfc8e374d6df45af85688db28a5bf373');
 // set base URL for links
-var baseURL = "https://www.jpost.com/breaking-news/";
+var articles = [];
 
-var scrape = function() {
-
-    // making an axios 'get' to the Breaking-News section of jpost.com website
-    return axios.get(baseURL).then(function(response) {
-    
-    // console.log(response.data);
-
-    var $ = cheerio.load(response.data);
-
-    // An empty array to save the data that we'll scrape
-    var articles = [];
-
-    $("div.breaking-news-link-container").each(function(i, element) {
-
-        // Save the headline, link, reporter and date
-        var headline = $(this).find("a").attr("title");
-        var link = $(this).find("a").attr("href");
-        var rd = $(this).find('ul').children('li').text();
-        var len = rd.length;
-        var date = rd.slice(-19);
-        var reporter = rd.slice(0, (len - 19));
-        
-        // Save results in an object and push into the articles array
-        if (headline && link) {
-            
-            var newData = {
-                headline: headline,
-                link: link,
-                reporterDate: reporter + " - " + date
-            };
-            // push article data into the articles array
-            articles.push(newData);
+function getNews(newsSearch){
+newsapi.v2.everything({
+        q: newsSearch,
+        language: 'en',
+      }).then(response => {
+          // console.log("Article Array:", response);
+          articles = response.articles.slice(0,5);
+          // console.log("Article Array:", articles);
+          // var content = articles[0].content;
+          // console.log("Content to Analyzer:", content.source, content);
+          let promises =[];
+          articles.forEach(article => {
+              promises.push(axios({
+                  "method":"GET",
+                  "url":"https://twinword-sentiment-analysis.p.rapidapi.com/analyze/",
+                  "headers":{
+                  "content-type":"application/x-www-form-urlencoded",
+                  "x-rapidapi-host":"twinword-sentiment-analysis.p.rapidapi.com",
+                  "x-rapidapi-key":"bcbc7d6dd8msh5e1eb73a59e842fp1df3fcjsnd9394db0f416"
+                  },"params":
+                      {
+                      "text": article.content
+                      }
+                  }))
+          })
+          Promise.all(promises)
+              .then(responses => {
+                  articles.map((article, i) => {
+                      let keys = Object.keys(responses[i].data)
+                      keys.forEach(key => {
+                          article[key] = responses[i].data[key]
+                      })
+                      return article
+                  })
+                  console.log(articles)
+              })
+              .catch((error)=>{
+                  console.log(error)
+              });
+      
+          // for (var i=0; i<5; i++) {
+          //     result.push()
+          //     console.log("[i] ===== TWINWORD ======= ");
+          //     axios({
+          //         "method":"GET",
+          //         "url":"https://twinword-sentiment-analysis.p.rapidapi.com/analyze/",
+          //         "headers":{
+          //         "content-type":"application/x-www-form-urlencoded",
+          //         "x-rapidapi-host":"twinword-sentiment-analysis.p.rapidapi.com",
+          //         "x-rapidapi-key":"bcbc7d6dd8msh5e1eb73a59e842fp1df3fcjsnd9394db0f416"
+          //         },"params":
+          //             {
+          //             "text": content
+          //             }
+          //         })
+          //         .then((response)=>{
+          //             console.log(response.data)
+          //         })
+          //         .catch((error)=>{
+          //             console.log(error)
+          //         });
+          //     };
+          });
         }
-    });
-    
-    // console.log(articles);
-
-    return articles;
-
-    });
-}
-
-module.exports = scrape;
+          
+        
+module.exports = getNews;
