@@ -2,7 +2,6 @@
 var axios = require("axios");
 const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI('bfc8e374d6df45af85688db28a5bf373');
-// set base URL for links
 var articles = [];
 
 function getNews(newsSearch){
@@ -13,8 +12,6 @@ newsapi.v2.everything({
           // console.log("Article Array:", response);
           articles = response.articles.slice(0,5);
           // console.log("Article Array:", articles);
-          // var content = articles[0].content;
-          // console.log("Content to Analyzer:", content.source, content);
           let promises =[];
           articles.forEach(article => {
               promises.push(axios({
@@ -35,7 +32,9 @@ newsapi.v2.everything({
                   articles.map((article, i) => {
                       let keys = Object.keys(responses[i].data)
                       keys.forEach(key => {
+                          if (key !== "keywords") {
                           article[key] = responses[i].data[key]
+                          }
                       })
                       return article
                   })
