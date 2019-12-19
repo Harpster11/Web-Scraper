@@ -10,20 +10,55 @@ var Schema = mongoose.Schema;
 // Create the headlineSchema with our schema class
 var headlineSchema = new Schema({
   // headline, a string, must be entered
-  headline: {
+  author: {
     type: String,
     required: true,
     unique: { index: { unique: true } }
   },
-  // reporterDate, a string, must be entered
-  reporterDate: {
+  // title, a string, must be entered
+  title: {
     type: String,
     required: false
   },
-  // link (url), a string, must be entered
-  link: {
+  // url to article, a string, must be entered
+  url: {
     type: String,
     required: true
+  },
+  // image url
+  urlToImage: {
+    type: String,
+    required: false
+  },
+  // published date
+  publishedAt: {
+    type: Date,
+    required: false
+  },
+  // description
+  description: {
+    type: String,
+    required: false
+  },
+  // content
+  content: {
+    type: String,
+    required: false
+  },
+  // type
+  type: {
+    type: String,
+    required: false
+  },
+    // score
+score: {
+  type: String,
+  required: false
+},
+  // ratio
+  ratio: {
+    type: String,
+    required: false
   },
   // date is just a string
   date: {

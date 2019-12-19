@@ -13,10 +13,11 @@ $(document).ready(function() {
       // If we have headlines, render them to the page
       if (data && data.length) {
         renderArticles(data);
-      } else {
-        // Otherwise render a message explaining we have no articles
-        renderEmpty();
-      }
+      } 
+      // else {
+      //   // Otherwise render a message explaining we have no articles
+      //   renderEmpty();
+      // }
     });
   }
 

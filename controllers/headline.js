@@ -7,7 +7,7 @@ module.exports = {
   findAll: function(req, res) {
     db.Headline
       .find(req.query)
-      .sort({ date: -1 })
+      .sort({ score: 1 })
       .then(function(dbHeadline) {
         res.json(dbHeadline);
       });
