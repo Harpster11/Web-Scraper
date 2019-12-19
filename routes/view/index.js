@@ -10,9 +10,9 @@ router.get("/", function(req, res) {
     });
 });
 
-// This route renders the saved handlebars page
-router.get("/presentation", function(req, res) {
-    res.render("presentation");
-});
+// // This route renders the saved handlebars page
+// router.get("/presentation", function(req, res) {
+//     res.render("presentation");
+// });
 
 module.exports = router;
