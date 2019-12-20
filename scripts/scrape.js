@@ -1,18 +1,24 @@
 // require axios and cheerio, enabling scrapes
 var axios = require("axios");
 const NewsAPI = require('newsapi');
+// const newsapi = new NewsAPI ('4acc3b9a971c4bf0ab6b2c7117303592');
 const newsapi = new NewsAPI('bfc8e374d6df45af85688db28a5bf373');
+
 var articles = [];
 
 function getNews(newsSearch){
+    console.log("before newsApi")
+
 newsapi.v2.everything({
         q: newsSearch,
         language: 'en',
       }).then(response => {
-          // console.log("Article Array:", response);
+        
+        console.log("/n/nthen")
           articles = response.articles.slice(0,5);
           // console.log("Article Array:", articles);
           let promises =[];
+
           articles.forEach(article => {
               promises.push(axios({
                   "method":"GET",
@@ -20,7 +26,9 @@ newsapi.v2.everything({
                   "headers":{
                   "content-type":"application/x-www-form-urlencoded",
                   "x-rapidapi-host":"twinword-sentiment-analysis.p.rapidapi.com",
-                  "x-rapidapi-key":"bcbc7d6dd8msh5e1eb73a59e842fp1df3fcjsnd9394db0f416"
+                //   "x-rapidapi-key":"bcbc7d6dd8msh5e1eb73a59e842fp1df3fcjsnd9394db0f416"
+                  "x-rapidapi-key":"ab0401ba39mshd22cfe38b5efc58p146bfbjsnd2d275948b9e"
+
                   },"params":
                       {
                       "text": article.content
@@ -38,12 +46,16 @@ newsapi.v2.everything({
                       })
                       return article
                   })
-                  console.log(articles)
+
+                  console.log("articles return",articles);
                   return(articles)
+
               })
               .catch((error)=>{
                   console.log(error)
               });
+
+              
       
           // for (var i=0; i<5; i++) {
           //     result.push()
