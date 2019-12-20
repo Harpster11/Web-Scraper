@@ -9,7 +9,12 @@ var Schema = mongoose.Schema;
 
 // Create the headlineSchema with our schema class
 var headlineSchema = new Schema({
-  // headline, a string, must be entered
+  // source with id and name 
+  // source: {
+  //   id: String,
+  //   name: String
+  // },
+  // author
   author: {
     type: String,
     required: true,
