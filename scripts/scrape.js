@@ -46,8 +46,10 @@ newsapi.v2.everything({
                       })
                       return article
                   })
-                  console.log("articles return",articles)
-                  
+
+                  console.log("articles return",articles);
+                  return(articles)
+
               })
               .catch((error)=>{
                   console.log(error)
